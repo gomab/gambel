@@ -99,6 +99,10 @@
                                 </li>
 
                                 <li class="list-group-item">
+                                    <a href="{{ route('post.index') }}">All posts</a>
+                                </li>
+
+                                <li class="list-group-item">
                                     <a href="{{ route('category.index') }}">All category</a>
                                 </li>
 

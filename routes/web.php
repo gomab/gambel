@@ -62,4 +62,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'uses' => 'CategoriesController@update',
         'as'   => 'category.update'
     ]);
+
+    Route::get('/posts', [
+        'uses' => 'PostsController@index',
+        'as'   => 'post.index'
+    ]);
+
 });
