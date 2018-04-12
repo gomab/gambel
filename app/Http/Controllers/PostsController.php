@@ -119,6 +119,18 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+
+        Toastr::success('Le Post a été placé dans la corbeille.', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->back();
+    }
+
+    public function trashed(){
+        $posts = Post::onlyTrashed()->get();
+
+        return view('admin.posts.trashed', compact('posts'));
     }
 }

@@ -103,6 +103,10 @@
                                 </li>
 
                                 <li class="list-group-item">
+                                    <a href="{{ route('post.trashed') }}">Trashed posts</a>
+                                </li>
+
+                                <li class="list-group-item">
                                     <a href="{{ route('category.index') }}">All category</a>
                                 </li>
 
