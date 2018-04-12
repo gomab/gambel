@@ -35,6 +35,16 @@
                         @endforeach    
                     </select>
                 </div>
+                
+                <div class="form-group">
+                    <label for="tags">Select Tags</label><br>
+                    @foreach($tags as $tag)
+                       <div class="form-check-inline">
+                           <label for=""><input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->tag }}</label>
+                           
+                       </div> 
+                    @endforeach    
+                </div>
 
                 <div class="form-group">
                     <label for="featured">Featured image</label>

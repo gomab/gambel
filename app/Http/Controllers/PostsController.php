@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Category;
 use App\Post;
@@ -29,6 +30,7 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
         if($categories->count() == 0){
             Toastr::info('You must have some categories before attempting to create a post.', 'Title', ["positionClass" => "toast-top-center"]);
@@ -37,7 +39,8 @@ class PostsController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.posts.create')->with('categories', $categories);
+        return view('admin.posts.create')->with('categories', $categories)
+                                              ->with('tags', $tags);
     }
 
     /**
@@ -54,7 +57,8 @@ class PostsController extends Controller
             'title'    => 'required',
             'featured' => 'required|image',
             'content'  => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'tags'      => 'required'
 
         ]);
 
@@ -72,6 +76,9 @@ class PostsController extends Controller
             'category_id' => $request->category_id,
             'slug'        => str_slug($request->title)
         ]);
+
+        //Lier le post aux tags
+        $post->tags()->attach($request->tags);
 
         //Session::flash('success', 'Post created successfully');
         Toastr::success('Post crée.', 'Title', ["positionClass" => "toast-top-right"]);
@@ -100,7 +107,9 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
-        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all());
+        return view('admin.posts.edit')->with('post', $post)
+                                            ->with('categories', Category::all())
+                                            ->with('tags', Tag::all());
     }
 
     /**
@@ -135,6 +144,9 @@ class PostsController extends Controller
         $post->content = $request->input('content');
         $post->category_id = $request->input('category_id');
         $post->save();
+
+        //Update Tags
+        $post->tags()->sync($request->tags);
 
         Toastr::success('Post MAJ.', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
 
