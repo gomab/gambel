@@ -26,6 +26,15 @@
                     <label for="title">Title</label>
                     <input type="text" name="title" class="form-control">
                 </div>
+                
+                <div class="form-group">
+                    <label id="category_id">Select a category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach    
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="featured">Featured image</label>
@@ -34,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" id="content" cols="5" rows="5" class="form-control">
+                    <textarea name="content" cols="5" rows="5" class="form-control">
 
                     </textarea>
                 </div>

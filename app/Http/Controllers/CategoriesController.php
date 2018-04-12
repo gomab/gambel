@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Session;
+use Session;
 //use Illuminate\Support\Facades\Session;
 use App\Category;
 use Illuminate\Http\Request;
