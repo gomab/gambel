@@ -91,15 +91,23 @@
                             <ul class="list-group">
 
                                 <li class="list-group-item">
-                                    <a href="{{ route('home') }}">Home</a>
+                                    <a href="{{ route('home') }}"><strong>=></strong>Home</a>
                                 </li>
 
                                 <li class="list-group-item">
-                                    <a href="{{ route('post.create') }}">Create new post</a>
+                                    <a href="{{ route('category.index') }}"><strong>=></strong>Category</a>
                                 </li>
 
                                 <li class="list-group-item">
-                                    <a href="{{ route('post.index') }}">All posts</a>
+                                    <a href="{{ route('category.create') }}">Create category</a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="{{ route('post.index') }}"><strong>=></strong>Posts</a>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <a href="{{ route('post.create') }}">Create post</a>
                                 </li>
 
                                 <li class="list-group-item">
@@ -107,12 +115,13 @@
                                 </li>
 
                                 <li class="list-group-item">
-                                    <a href="{{ route('category.index') }}">All category</a>
+                                    <a href="{{ route('tag.index') }}"><strong>=></strong>Tags</a>
                                 </li>
 
                                 <li class="list-group-item">
-                                    <a href="{{ route('category.create') }}">Create new category</a>
+                                    <a href="{{ route('tag.create') }}">Create Tags</a>
                                 </li>
+
                             </ul>
                         </div>
                      @endif
