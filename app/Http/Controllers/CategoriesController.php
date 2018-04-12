@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Brian2694\Toastr\Facades\Toastr;
 use Session;
 //use Illuminate\Support\Facades\Session;
 use App\Category;
@@ -49,10 +50,11 @@ class CategoriesController extends Controller
         $category->name = $request->name;
         $category->save();
 
-       Session::flash('success', 'You successfuly created a new category.');
+       //Session::flash('success', 'You successfuly created a new category.');
 
+        Toastr::success('Catégorie crée ', 'Title', ["positionClass" => "toast-top-right"]);
 
-        return redirect()->route('category.index', compact('category'));
+        return redirect()->route('category.index', compact('category'))->with('successMsg','Category ajouté avec succes');
     }
 
     /**
@@ -92,7 +94,8 @@ class CategoriesController extends Controller
         $category->name = $request->name;
         $category->save();
 
-       Session::flash('success', 'You successfuly updated the category.');
+       //Session::flash('success', 'You successfuly updated the category.');
+        Toastr::success('Catégorie MAJ ', 'Title', ["positionClass" => "toast-top-right"]);
 
         return redirect()->route('category.index');
 
@@ -109,8 +112,8 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category->delete();
 
-        Session::flash('success', 'You successfuly deleted the category.');
-
+        //Session::flash('success', 'You successfuly deleted the category.');
+        Toastr::success('Catégorie supprimé ', 'Title', ["positionClass" => "toast-top-right"]);
         return redirect()->route('category.index');
     }
 }

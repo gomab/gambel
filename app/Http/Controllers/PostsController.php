@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Session;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -26,7 +26,16 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create')->with('categories', Category::all());
+        $categories = Category::all();
+
+        if($categories->count() == 0){
+            Toastr::info('You must have some categories before attempting to create a post.', 'Title', ["positionClass" => "toast-top-center"]);
+            //Session::flash('info', 'You must have some categories before attempting to create a post.');
+
+            return redirect()->back();
+        }
+
+        return view('admin.posts.create')->with('categories', $categories);
     }
 
     /**
@@ -60,6 +69,7 @@ class PostsController extends Controller
         ]);
 
         //Session::flash('success', 'Post created successfully');
+        Toastr::success('Post crée.', 'Title', ["positionClass" => "toast-top-right"]);
 
         dump($request->all());
     }

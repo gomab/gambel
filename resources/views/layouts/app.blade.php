@@ -19,6 +19,10 @@
         @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
         @endif
+
+        @if(Session::has('info'))
+        toastr.success("{{ Session::get('info') }}");
+        @endif
     </script>
 
 
@@ -29,6 +33,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 </head>
 <body>
@@ -111,5 +116,18 @@
         </main>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Msg Error -->
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                toastr.error('{{ $error }}');
+            </script>
+        @endforeach
+    @endif
+    <!-- End Msg Error -->
+
+
+    {!! Toastr::message() !!}
 </body>
 </html>

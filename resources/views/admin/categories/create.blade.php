@@ -4,7 +4,9 @@
 
 
     @include('admin.includes.errors')
-
+    <!-- Validation errors -->
+    @include('layouts.partial.msg')
+    <!-- End validation errors -->
     <div class="card">
         <div class="card-header">
             Create a new category
