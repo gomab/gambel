@@ -73,13 +73,28 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'as'   => 'post.delete'
     ]);
 
-    Route::post('/post/edit/{id}', [
-        'uses' => 'PostsController@destroy',
+    Route::get('/post/edit/{id}', [
+        'uses' => 'PostsController@edit',
         'as'   => 'post.edit'
+    ]);
+
+    Route::post('/post/update/{id}', [
+        'uses' => 'PostsController@update',
+        'as'   => 'post.update'
     ]);
 
     Route::get('/posts/trashed', [
         'uses' => 'PostsController@trashed',
         'as'   => 'post.trashed'
+    ]);
+
+    Route::get('/posts/kill/{id}', [
+        'uses' => 'PostsController@kill',
+        'as'   => 'post.kill'
+    ]);
+
+    Route::get('/posts/restore/{id}', [
+        'uses' => 'PostsController@restore',
+        'as'   => 'post.restore'
     ]);
 });

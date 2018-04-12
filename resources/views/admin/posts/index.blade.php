@@ -21,13 +21,13 @@
                       <td>{{ $post->title }}</td>
 
                       <td>
-                          <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-info btn-xs">
-                              <span>edit</span>
+                          <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-info btn-sm">
+                              <span>Edit</span>
                           </a>
                       </td>
 
                       <td>
-                          <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-danger btn-xs">
+                          <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-danger btn-sm">
                               <span>Trash</span>
                           </a>
                       </td>

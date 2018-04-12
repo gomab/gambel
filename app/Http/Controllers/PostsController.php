@@ -63,6 +63,8 @@ class PostsController extends Controller
         $featured_new_name = time().$featured->getClientOriginalName();
         $featured->move('uploads/posts', $featured_new_name);
 
+        $categories = Category::all();
+
         $post = Post::create([
             'title'       => $request->title,
             'content'     => $request->input('content'),
@@ -96,7 +98,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('admin.posts.edit')->with('post', $post)->with('categories', Category::all());
     }
 
     /**
@@ -108,7 +112,33 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'    => 'required',
+            //'featured' => 'required|image',
+            'content'  => 'required',
+            'category_id' => 'required'
+
+        ]);
+
+        $categories = Category::all();
+        $post = Post::find($id);
+
+        if($request->hasFile('featured')){
+            $featured = $request->featured;
+            $featured_new_name = time() . $featured->getClientOriginalName();
+            $featured->move('uploads/posts', $featured_new_name);
+            $post->featured = 'uploads/posts/'.$featured_new_name;
+        }
+
+
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->category_id = $request->input('category_id');
+        $post->save();
+
+        Toastr::success('Post MAJ.', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -132,5 +162,23 @@ class PostsController extends Controller
         $posts = Post::onlyTrashed()->get();
 
         return view('admin.posts.trashed', compact('posts'));
+    }
+
+    public function kill($id){
+       $post = Post::withTrashed()->where('id', $id)->first();
+       $post->forceDelete();
+
+        Toastr::success('Post supprimé avec succes', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->back();
+    }
+
+    public function restore($id){
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+
+        Toastr::success('Post restoré avec succes', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->route('post.index');
     }
 }
