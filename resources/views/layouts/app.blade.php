@@ -137,7 +137,11 @@
                                     </li>
                                 @endif
 
-
+                                @if(Auth::user()->admin)
+                                    <li class="list-group-item">
+                                        <a href="{{ route('settings') }}"><strong>=></strong>Settings</a>
+                                    </li>
+                                @endif
 
                             </ul>
                         </div>
