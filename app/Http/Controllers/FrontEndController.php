@@ -26,4 +26,14 @@ class FrontEndController extends Controller
                 ->with('settings', Setting::first());
 
     }
+
+    public function singlePost($slug){
+
+        $post = Post::where('slug', $slug)->first();
+
+        return view('front.single')->with('post', $post)
+                                        ->with('title', $post->title)
+                                        ->with('settings', Setting::first())
+                                        ->with('categories', Category::take(5)->get());
+    }
 }
