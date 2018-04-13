@@ -122,14 +122,15 @@
                                     <a href="{{ route('tag.create') }}">New Tag</a>
                                 </li>
 
-                                <li class="list-group-item">
-                                    <a href="{{ route('user.index') }}"><strong>=></strong>Users</a>
-                                </li>
+                                @if(\Illuminate\Support\Facades\Auth::user()->admin)
+                                    <li class="list-group-item">
+                                        <a href="{{ route('user.index') }}"><strong>=></strong>Users</a>
+                                    </li>
 
-                                <li class="list-group-item">
-                                    <a href="{{ route('user.create') }}">New user</a>
-                                </li>
-
+                                    <li class="list-group-item">
+                                        <a href="{{ route('user.create') }}">New user</a>
+                                    </li>
+                                @endif
 
                             </ul>
                         </div>

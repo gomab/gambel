@@ -6,22 +6,21 @@ use Brian2694\Toastr\Facades\Toastr;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class Admin
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if (Auth::guard($guard)->check()) {
+        if(!Auth::user()->admin){
+            Toastr::info('U do not permission to perform this action', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
 
-            Toastr::info('Welcome', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
-            return redirect('/admin/home');
+            return redirect()->back();
         }
 
         return $next($request);
