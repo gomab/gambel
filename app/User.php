@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * User can use only one profile
+     * User can use only one profiles
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile(){
