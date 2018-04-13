@@ -110,9 +110,21 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        $user->profile()->delete();
+        $user->delete();
+
+        Toastr::success('User deleted.', 'Brazza HipHop', ["positionClass" => "toast-top-right"]);
+
+        return redirect()->back();
+
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function admin($id){
         $user = User::find($id);
         $user->admin = 1;
@@ -123,6 +135,10 @@ class UsersController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function not_admin($id){
         $user = User::find($id);
         $user->admin = 0;

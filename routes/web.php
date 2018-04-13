@@ -154,7 +154,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'as'   => 'user.update'
     ]);
 
-    Route::get('/user/delete', [
+    Route::get('/user/delete/{id}', [
         'uses' => 'UsersController@destroy',
         'as'   => 'user.delete'
     ]);

@@ -29,7 +29,9 @@
                           </td>
 
                           <td>
-                             Delete
+                             @if(Auth::id() !== $user->id)
+                                  <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-sm">Delete</a>
+                             @endif
                           </td>
                       </tr>
                   @endforeach

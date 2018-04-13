@@ -32,8 +32,8 @@ class PostsController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        if($categories->count() == 0){
-            Toastr::info('You must have some categories before attempting to create a post.', 'Title', ["positionClass" => "toast-top-center"]);
+        if($categories->count() == 0 || $tags->count() == 0){
+            Toastr::info('You must have some categories before attempting to create a post and a tag.', 'Title', ["positionClass" => "toast-top-center"]);
             //Session::flash('info', 'You must have some categories before attempting to create a post.');
 
             return redirect()->back();
