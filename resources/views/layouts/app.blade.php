@@ -35,6 +35,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -160,7 +161,7 @@
     @endif
     <!-- End Msg Error -->
 
-
+    @yield('scripts')
     {!! Toastr::message() !!}
 </body>
 </html>

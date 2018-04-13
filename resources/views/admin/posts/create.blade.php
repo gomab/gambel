@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('styles')
+    <!-- include summernote css -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+@stop
+
 @section('content')
 
     @if(count($errors) > 0)
@@ -53,7 +58,7 @@
 
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" cols="5" rows="5" class="form-control">
+                    <textarea name="content" id="content" cols="5" rows="5" class="form-control">
 
                     </textarea>
                 </div>
@@ -69,4 +74,16 @@
             </form>
         </div>
     </div>
+@stop
+
+
+@section('scripts')
+    <!-- include summernote js -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#content').summernote();
+        });
+    </script>
 @stop
